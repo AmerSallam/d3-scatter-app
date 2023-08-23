@@ -16,10 +16,9 @@ const svg = d3
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Read the data
-d3.csv( 
+d3.csv(
   // "regData.csv"
-"https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv"
-
+  "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv"
 ).then(function (csvdata) {
   // Add X axis
   const x = d3.scaleLinear().domain([3, 9]).range([0, width]);
@@ -33,15 +32,17 @@ d3.csv(
   svg.append("g").call(d3.axisLeft(y));
 
   // Add dots
-  svg.append("g")
-     .selectAll("circle")
-     .data(csvdata)
-     .join("circle")
-     .attr("cx", function (d) {
-       return x(d.Sepal_Length);
+  svg
+    .append("g")
+    .selectAll("circle")
+    .data(csvdata)
+    .join("circle")
+    .attr("fill", "green")
+    .attr("cx", function (d) {
+      return x(d.Sepal_Length);
     })
     .attr("cy", function (d) {
-       return y(d.Petal_Length);
+      return y(d.Petal_Length);
     })
     .attr("r", 5);
 });
